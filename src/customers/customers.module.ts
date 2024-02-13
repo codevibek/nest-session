@@ -6,7 +6,7 @@ import {
 } from "@nestjs/common";
 import { CustomersController } from "./controllers/customers/customers.controller";
 import { CustomersService } from "./services/customers/customers.service";
-import { ValidateCustomerMiddleware } from "./middlewares/validateCustomer.middleware";
+import { ValidateCustomerMiddleware } from "./middlewares/validateExpiredCustomer.middleware";
 
 @Module({
   controllers: [CustomersController],
@@ -18,5 +18,9 @@ export class CustomersModule implements NestModule {
       path: "customers/search/:id",
       method: RequestMethod.GET,
     });
+    // consumer.apply(ValidateCustomerMiddleware).forRoutes({
+    // path: "customers/search/:id",
+    // method: RequestMethod.GET,
+    // });
   }
 }
